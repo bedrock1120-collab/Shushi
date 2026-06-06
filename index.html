@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khushi Emergency Response System</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+overflow:hidden;
+}
+
+.screen{
+display:none;
+height:100vh;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:30px;
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.screen::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.65);
+}
+
+.content{
+position:relative;
+z-index:2;
+max-width:800px;
+}
+
+.active{
+display:flex;
+}
+
+h1{
+font-size:3rem;
+margin-bottom:20px;
+color:#60a5fa;
+}
+
+p{
+font-size:1.2rem;
+margin:15px 0;
+line-height:1.7;
+}
+
+button{
+padding:15px 30px;
+margin:10px;
+border:none;
+border-radius:999px;
+cursor:pointer;
+font-size:1rem;
+background:#2563eb;
+color:white;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.08);
+}
+
+#yesBtn{
+font-size:18px;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+}
+
+#message{
+white-space:pre-line;
+text-align:left;
+max-width:800px;
+line-height:1.8;
+}
+</style>
+</head>
+<body>
+
+<div class="screen active" id="s1" style="background-image:url('tasm1.jpg')">
+<div class="content">
+<h1>🕷️ KHUSHI DETECTED</h1>
+<p>Emergency Alert...</p>
+<p>A wild Khushi has been spotted being sad.</p>
+<p>This is unacceptable.</p>
+<button onclick="next(1)">Start Investigation</button>
+</div>
+</div>
+
+<div class="screen" id="s2">
+<div class="card">
+<h1>Question #1</h1>
+<p>Are you sad?</p>
+
+<button id="yesBtn" onclick="next(2)">
+YES 😔
+</button>
+
+<button onclick="growYes()">
+NO 😎
+</button>
+
+<p id="response"></p>
+</div>
+</div>
+
+<div class="screen" id="s3">
+<div class="card">
+<h1>Investigation Report</h1>
+
+<p>What's the reason?</p>
+
+<button onclick="pickReason('acting')">
+My acting skills 🎬
+</button>
+
+<button onclick="pickReason('lazy')">
+I'm lazy 😴
+</button>
+
+<button onclick="pickReason('chopped')">
+I got chopped 😭
+</button>
+
+<button onclick="pickReason('homeboy')">
+Not having my homeboy 😔
+</button>
+
+<p id="reason"></p>
+
+<button id="continueBtn" style="display:none" onclick="next(3)">
+Continue
+</button>
+</div>
+</div>
+
+<div class="screen" id="s4" style="background-image:url('tasm2.jpg')">
+<div class="content card">
+<h1>Spider-Man Wisdom</h1>
+
+<p>
+The strongest people aren't the ones
+who never struggle.
+</p>
+
+<p>
+They're the ones who keep moving
+forward anyway.
+</p>
+
+<button onclick="next(4)">Continue</button>
+</div>
+</div>
+
+<div class="screen" id="s5">
+<div class="card">
+<h1>Dictionary Time 📖</h1>
+
+<p>
+Joke (noun)
+</p>
+
+<p>
+Something said or done
+to make people laugh.
+</p>
+
+<p>
+Interesting...
+</p>
+
+<p>
+Notice how it doesn't say:
+"Make Khushi sad."
+</p>
+
+<p>
+Someone might have been dumb.
+</p>
+
+<p>
+That someone may or may not
+be named Arzun 😭
+</p>
+
+<button onclick="next(5)">
+Continue
+</button>
+
+</div>
+</div>
+
+<div class="screen" id="s6" style="background-image:url('tasm3.jpg')">
+<div class="content card">
+
+<h1>Confidential Message</h1>
+
+<p>
+Do you want to hear
+what Arzun has to say?
+</p>
+
+<button onclick="showMessage()">
+YES 💙
+</button>
+
+<button onclick="alert('Nice try 😭')">
+NO
+</button>
+
+</div>
+</div>
+
+<div class="screen" id="s7">
+<div class="card">
+
+<h1>💙</h1>
+
+<div id="message"></div>
+
+</div>
+</div>
+
+<script>
+
+function next(current){
+document.getElementById("s"+current).classList.remove("active");
+document.getElementById("s"+(current+1)).classList.add("active");
+}
+
+let size=18;
+
+function growYes(){
+
+size+=8;
+
+document.getElementById("yesBtn").style.fontSize=size+"px";
+
+document.getElementById("response").innerText=
+"We both know that's cap 😭";
+}
+
+function pickReason(type){
+
+let text="";
+
+if(type==="homeboy"){
+text="✅ Investigation complete. Root cause detected: Missing Homeboy Syndrome.";
+}
+else{
+text="Possible cause found. Further investigation suggests Homeboy Deficiency may also be involved 😭";
+}
+
+document.getElementById("reason").innerText=text;
+
+document.getElementById("continueBtn").style.display="inline-block";
+}
+
+function showMessage(){
+
+document.getElementById("s6").classList.remove("active");
+document.getElementById("s7").classList.add("active");
+
+const msg=`Khushi,
+
+Tu pagal ladki jo har time mereko ignore karti hai aaj khud tilt ho gayi 😭
+
+Mera glorious purpose in life toh tujhe tilt karna hai, bauniiiii.
+
+Par honestly, is baar thoda unexpected reaction aa gaya tera. Main toh expect kar raha tha ki tu seedha mujhe gaali degi aur phir hum dono hasenge, lekin tu toh seedha chali gayi :(
+
+Jokes aside...
+
+I'm genuinely sorry agar tujhe bura laga.
+
+Mera intention tujhe hurt karna bilkul nahi tha.
+
+Tu mera bahut khayal rakhti hai aur main uske liye genuinely thankful hoon.
+
+Future mein agar main kabhi line cross karu toh please seedha bol diya kar.
+
+Maine acting wali baat sirf mazaak mein boli thi.
+
+Ulta main toh chahta hoon ki tu itni successful ho jaaye ki baad mein main bol saku:
+
+"Haan bhai, is future actress ko main pehle se jaanta tha."
+
+Tu important hai meri life mein.
+
+Mujhe nahi pata us sentence ka tere liye kya matlab hai.
+
+Par mere liye uska matlab hai.
+
+So yeah...
+
+I'm sorry re.
+
+Bura mat maan. 💙
+
+– Arzun 🕷️`;
+
+let i=0;
+
+const target=document.getElementById("message");
+
+const timer=setInterval(()=>{
+target.innerHTML+=msg.charAt(i);
+i++;
+
+if(i>=msg.length){
+clearInterval(timer);
+}
+},25);
+
+}
+</script>
+
+</body>
+</html>
